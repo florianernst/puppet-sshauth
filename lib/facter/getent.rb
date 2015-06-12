@@ -8,7 +8,7 @@ require 'facter'
 # Returns passwd entry for all users using "getent".
 Facter.add(:getent_passwd) do
   users = ''
-  %x{/usr/bin/getent passwd}.each do |n|
+  %x{/usr/bin/getent passwd}.split("\n").each do |n|
      users << n.chomp+'|'
   end
   setcode do
@@ -19,7 +19,7 @@ end
 # Returns groups entry for all groups using "getent".
 Facter.add(:getent_group) do
   groups = ''
-  %x{/usr/bin/getent group}.each do |n|
+  %x{/usr/bin/getent group}.split("\n").each do |n|
      groups << n.chomp+'|'
   end
   setcode do
